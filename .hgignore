@@ -1,0 +1,6 @@
+syntax: glob
+Library/*
+Logs/*
+Temp/*
+.vs/*
+obj/*
