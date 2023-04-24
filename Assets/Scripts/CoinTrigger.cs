@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class CoinTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    private GameObject _player;
 
+    private void Awake()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        CharacterController2D cc2d = _player.GetComponent<CharacterController2D>();
+        cc2d.OnCollision += OnCollisionCallback;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionCallback(Collider2D coll2d, ColliderDistance2D collDist2d)
     {
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        if (coll2d.gameObject.CompareTag("Coin"))
         {
-            Debug.Log(collision.name);
+            Destroy(coll2d.gameObject);
+            RuntimeGameDataManager.AddCoinCounter(1);
         }
     }
 }

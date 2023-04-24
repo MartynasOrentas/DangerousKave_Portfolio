@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using KaveUtil;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class BoxController : MonoBehaviour
@@ -44,6 +45,7 @@ public class BoxController : MonoBehaviour
     {
         _boxCollider = GetComponent<BoxCollider2D>();
         UpdateMaxVelocity();
+        
     }
 
     void Update()
@@ -98,12 +100,13 @@ public class BoxController : MonoBehaviour
         // draw state
         //
         string text = string.Format("{0}", _numCollision);
-        DrawTextInSceneView(transform.position, text, Color.white);
+        
+        Util.DrawTextInSceneView(transform.position, text, Color.white);
         Gizmos.color = oldColor; // restore original Gizmos color
     }
 
     void UpdateMaxVelocity()
     {
-        _maxVelocity = Rotate(Vector2.right, _velocityDegree * Mathf.Deg2Rad) * _speed;
+        _maxVelocity = Util.Rotate(Vector2.right, _velocityDegree * Mathf.Deg2Rad) * _speed;
     }
 }
